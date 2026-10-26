@@ -1,4 +1,5 @@
 import { projectVisuals } from './project-visuals.js';
+import { LESSONS, VIDEOS, formatTimestamp, videoAt } from './lessons.js';
 
 export const LEVELS = { beginner: 'Just starting', intermediate: 'A little practice', advanced: 'Feeling confident' };
 export const MINUTES = [15, 30, 45, 60];
@@ -12,11 +13,6 @@ export const CRAFTS = {
   crochet: {
     name: 'Crochet', icon: '✿',
     supplies: [yarn, item('Crochet hook', '1 · about 5 mm', 'The yarn label takes priority. An ergonomic handle can be comfortable for practice.', '5 mm crochet hook'), item('Tapestry needle', '1 blunt needle', 'Choose a large eye for weaving in yarn ends.', 'yarn tapestry needle'), item('Locking stitch markers', '2–4', 'Mark the first and last stitch. Safety pins can work too.', 'locking crochet stitch markers'), ...common],
-    videos: [
-      { id: 'GcOzdAzmtNM', title: 'Crochet for absolute beginners, episode one', creator: 'Bella Coco', popularity: '24M+ views', note: 'Start with holding the hook, slip knots, and chains.' },
-      { id: 'npIsh-o9AM0', title: 'How to crochet a granny square', creator: 'Bella Coco', popularity: 'Popular project lesson', note: 'A useful next step for working in rounds and changing colors.' }
-    ],
-    tip: 'Bella Coco uses UK terminology. UK double crochet is US single crochet; UK treble is US double crochet. Follow one set of terms throughout your project.',
     projects: {
       beginner: [
         { title: 'Your first little crochet square', description: 'A palm-sized practice square. A small finish is still a finish.', target: 'One 5–7 cm square', query: 'crochet small single crochet square beginner tutorial', steps: ['Try slip knots, chains, and US single crochet. Aim for relaxed hands rather than perfect tension.', 'Chain about 11. Work 10 US single crochet stitches across. Make a turning chain and count 10 stitches each row.', 'Add a few rows and count the stitches. Stop at a square, about 5–7 cm; fewer rows are fine if time is tight.', 'Fasten off and weave in both ends with a tapestry needle. Flatten the square with your hands.'] },
@@ -35,11 +31,6 @@ export const CRAFTS = {
   knitting: {
     name: 'Knitting', icon: '❋',
     supplies: [yarn, item('Straight knitting needles', '1 pair · about 5 mm', 'Use the size recommended on your yarn label. Wood or bamboo grips the yarn well.', '5 mm bamboo straight knitting needles'), item('Tapestry needle', '1 blunt needle', 'A large eye makes it easier to weave in the ends.', 'yarn tapestry needle'), item('Stitch markers', '2', 'Optional for these small squares, but helpful for marking a pattern repeat.', 'knitting stitch markers'), ...common],
-    videos: [
-      { id: 'Egp4NRhlMDg', title: 'The knit stitch for total beginners', creator: 'Sheep & Stitch', popularity: '6M+ views', note: 'Close-up practice for the stitch that makes garter stitch.' },
-      { id: '1vm6oaYzHyA', title: 'How to cast on for total beginners', creator: 'Sheep & Stitch', popularity: 'Popular foundation lesson', note: 'Learn how to get the first stitches onto your needle.' }
-    ],
-    tip: 'Knit every row for garter stitch. For ribbing or seed stitch, check your project tutorial for knit and purl repeats before casting on. Use the small practice session to test them.',
     projects: {
       beginner: [
         { title: 'Your first knitted square', description: 'A tiny garter-stitch sampler to keep as your first handmade milestone.', target: 'One 5–7 cm practice square', query: 'Sheep and Stitch garter stitch beginner square bind off', steps: ['Watch the cast-on and knit-stitch lessons. Practice a relaxed grip with the needles.', 'Cast on about 10–12 stitches. Knit every stitch of every row for garter stitch.', 'Work a few rows at a time, counting stitches. Stop when the little piece is roughly square.', 'Bind off loosely using a beginner bind-off lesson. Weave in the two yarn ends.'] },
@@ -58,10 +49,6 @@ export const CRAFTS = {
   embroidery: {
     name: 'Embroidery', icon: '✾',
     supplies: [item('Cotton fabric', '1 piece · about 25 × 25 cm', 'Choose plain, tightly woven cotton. Leave at least 5 cm around your hoop.', 'plain cotton embroidery fabric'), item('Embroidery hoop', '1 · 10–15 cm', 'A small hoop keeps this project manageable. Tighten until the fabric is smooth.', '4 inch 6 inch embroidery hoop'), item('Stranded embroidery floss', '3 colors · 1 skein each', 'A flower color, a leaf color, and an accent. Separate the strands as your tutorial directs.', 'cotton stranded embroidery floss'), item('Embroidery needles', '1 pack · sizes 5–9', 'Match the needle eye to the number of floss strands you use.', 'embroidery needles size 5 9'), item('Washable fabric pen', '1', 'Test on scrap fabric first. A faint pencil line can also work on light cotton.', 'water soluble embroidery marking pen'), item('Small scissors', '1 pair', 'Use sharp scissors for clean thread ends.')],
-    videos: [
-      { id: 'QBQ_a0WrE3Y', title: '50 must-know embroidery stitches', creator: 'HandiWorks', popularity: '1M+ views', note: 'A stitch reference, not a homework list. Learn only the stitches your small project needs.' }
-    ],
-    tip: 'Use only the chapters you need. Backstitch starts at 0:31, stem stitch at 1:50, lazy daisy at 4:00, and satin stitch at 4:30 in the HandiWorks reference. Try each stitch on scrap cotton first.',
     projects: {
       beginner: [
         { title: 'A tiny stitched daisy', description: 'A little flower, a few patient stitches, and your very first hoop.', target: 'One 2–3 cm daisy motif', query: 'beginner lazy daisy embroidery flower stem stitch tutorial', steps: ['Hoop scrap cotton and try backstitch and lazy daisy. Use two or three floss strands to start.', 'Draw one small daisy and a short stem on your fabric. Keep the whole design 2–3 cm tall.', 'Stitch a short backstitch stem and six lazy-daisy petals. Use a few straight stitches for the center.', 'Secure thread ends on the back, check for loose loops, and trim the tails. Keep the fabric in the hoop.'] },
@@ -108,6 +95,10 @@ export function generatePlan(input) {
   if (options.craft === 'crochet' && options.level !== 'beginner') supplies[0] = { ...supplies[0], quantity: '2 colors · 100 g total' };
   if (options.craft === 'knitting' && options.level === 'advanced') supplies.push(item('Cable needle', '1', 'Choose a cable needle close to your working needle size.', '5 mm cable needle'));
   if (options.craft === 'embroidery' && options.level === 'advanced') supplies[2] = { ...supplies[2], detail: 'Choose three neighboring shades for blending. Use one strand for the shaded stitches.' };
+  const lesson = LESSONS[options.craft][options.level];
+  const watch = lesson.watch[scope] || lesson.watch[0];
+  const toLink = ({ key, start, label }) => ({ key, label, start, time: formatTimestamp(start), url: videoAt(VIDEOS[key].id, start), creator: VIDEOS[key].creator, title: VIDEOS[key].title });
+  const videos = [...new Set(watch.flat().map(link => link.key))].map(key => ({ ...VIDEOS[key], key }));
   const restDays = options.days === 7 ? [3] : [4, 10];
   const phases = options.days === 7 ? [0, 1, 2, 2, 3, 4] : [0, 0, 1, 1, 2, 2, 2, 2, 2, 3, 3, 4];
   const titles = ['Get to know your materials', 'Make a small beginning', 'One little section at a time', 'The finishing touches', 'Look what you made'];
@@ -115,15 +106,15 @@ export function generatePlan(input) {
   let session = 0;
   for (let index = 0; index < options.days; index++) {
     if (restDays.includes(index)) {
-      schedule.push({ day: index + 1, title: 'A little breathing room', detail: 'Rest your hands, catch up on a missed session, or simply leave your project for tomorrow. No extra work is required.', minutes: 0, rest: true, milestone: '' });
+      schedule.push({ day: index + 1, title: 'A little breathing room', detail: 'Rest your hands, catch up on a missed session, or simply leave your project for tomorrow. No extra work is required.', minutes: 0, rest: true, milestone: '', watch: [] });
       continue;
     }
     const phase = phases[session++];
     const final = phase === 4;
     const lastInPhase = phases[session] !== phase;
-    schedule.push({ day: index + 1, title: titles[phase], detail: final ? `Check your finished piece against your goal: ${project.target.toLowerCase()}. Take a photo, note one thing you learned, and stop here. If it needs more time, keep the same small daily sessions.` : project.steps[phase] + (phase === 2 ? ' Continue from where you stopped last time, and put it down when your timer ends.' : ''), minutes: final ? Math.min(15, options.minutes) : options.minutes, rest: false, milestone: lastInPhase ? ['A stitch you understand', 'Your project is underway', 'Your main piece is made', 'Ends tucked, details finished', 'Celebrate your small finish'][phase] : '' });
+    schedule.push({ day: index + 1, title: titles[phase], detail: final ? `Check your finished piece against your goal: ${project.target.toLowerCase()}. Take a photo, note one thing you learned, and stop here. If it needs more time, keep the same small daily sessions.` : project.steps[phase] + (phase === 2 ? ' Continue from where you stopped last time, and put it down when your timer ends.' : ''), minutes: final ? Math.min(15, options.minutes) : options.minutes, rest: false, milestone: lastInPhase ? ['A stitch you understand', 'Your project is underway', 'Your main piece is made', 'Ends tucked, details finished', 'Celebrate your small finish'][phase] : '', watch: final ? [] : watch[phase].map(toLink) });
   }
-  return { options, craftName: craft.name, icon: craft.icon, project, visuals, supplies, videos: craft.videos, tutorialTip: craft.tip, schedule, totalMinutes: schedule.reduce((sum, day) => sum + day.minutes, 0), activeDays };
+  return { options, craftName: craft.name, icon: craft.icon, project, visuals, supplies, videos, tutorialTip: lesson.tip, schedule, totalMinutes: schedule.reduce((sum, day) => sum + day.minutes, 0), activeDays };
 }
 export function restoreSaved(raw) {
   try {

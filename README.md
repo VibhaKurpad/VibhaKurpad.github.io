@@ -1,8 +1,8 @@
 # Craft Happens
 
-Version 1.0.0. See [CHANGELOG.md](CHANGELOG.md) for the first release.
+Version 2.0.0. See [CHANGELOG.md](CHANGELOG.md) for release notes.
 
-A pastel craft planner by Vibha Kurpad. Choose crochet, knitting, or hand embroidery, your experience, 15–60 minutes per day, and one or two weeks. The planner chooses a small project, builds a supply checklist, links to tutorials and stores, and creates daily goals with rest days.
+A colorful craft planner by Vibha Kurpad. Choose crochet, knitting, or hand embroidery, your experience, 15–60 minutes per day, and one or two weeks. The planner chooses a small project, builds a supply checklist, links to tutorials and stores, and creates daily goals with rest days.
 
 ## Local review
 
@@ -38,7 +38,7 @@ Enable Dependabot alerts and the dependency graph in repository security setting
 
 This is a curated, deterministic planner, not a live AI or web-search service. Unsupported crafts receive a clear message. Larger time budgets choose larger projects; skill levels change techniques and supplies. Completion times are estimates, and the schedule can be repeated or shortened. Gather materials before day 1.
 
-Video links were researched October 26, 2026. Popularity labels are rounded snapshots, not live ratings. Starting sources include [Bella Coco's beginner lesson](https://www.youtube.com/watch?v=GcOzdAzmtNM), [Sheep & Stitch's knit lesson](https://www.youtube.com/watch?v=Egp4NRhlMDg), and [HandiWorks' stitch reference](https://www.youtube.com/watch?v=QBQ_a0WrE3Y). Project walkthrough links are explicitly labeled YouTube searches, not vetted individual videos. Review links and popularity labels periodically in `src/planner.js`.
+Each craft and skill level has its own lead tutorial, chosen to match that level's project (for example, single crochet, then granny squares, then moss stitch). Every making day in the timeline links straight to the chapters to watch that day, using the creators' own YouTube chapter times. Videos, chapters, and popularity labels were checked October 26, 2026; view counts are rounded snapshots, not live ratings. Project walkthrough links are explicitly labeled YouTube searches, not vetted individual videos. Review videos and chapter times periodically in `src/lessons.js`; the tests check that every timestamp falls inside its video.
 
 Shopping links are non-affiliate retailer searches, not guaranteed product listings or prices. [Michaels' JOANN shopper page](https://www.michaels.com/lp/welcome-joann) explains the current store alternative.
 
@@ -51,10 +51,11 @@ Nine locally hosted WebP contact sheets cover all 18 projects and 54 stage views
 ## Files
 
 - `src/planner.js`: project library, supplies, schedule generation, and saved-state validation.
+- `src/lessons.js`: tutorial videos per craft and level, tips, and the chapter timestamps for each plan step.
 - `src/app.js`: accessible controls, checklists, tabs, and persistence.
 - `src/project-visuals.js`: image matching, stage descriptions, and accessible image text.
-- `src/styles.css`: responsive pastel design and print layout.
-- `assets/`: original SVG craft illustrations.
+- `src/styles.css`: responsive, animated colorful design and print layout. Motion is disabled for reduced-motion users.
+- `assets/`: favicon, progress pictures, and self-hosted Google Sans and Pacifico fonts with their SIL Open Font License files. The hero illustration is inline SVG in `index.html`, so CSS can animate it.
 - `scripts/`: dependency-free local server and build.
 - `tests/`: plan coverage, validation, progress restoration, and safe shopping links.
 

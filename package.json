@@ -1,6 +1,6 @@
 {
   "name": "craft-happens",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "description": "A gentle craft planner for crochet, knitting, and embroidery.",
@@ -9,7 +9,7 @@
     "start": "node scripts/serve.mjs",
     "build": "node scripts/build.mjs",
     "test": "node --test",
-    "check": "node --check src/app.js && node --check src/planner.js && npm test && npm run build"
+    "check": "node --check src/app.js && node --check src/planner.js && node --check src/lessons.js && npm test && npm run build"
   },
   "engines": { "node": ">=22" }
 }

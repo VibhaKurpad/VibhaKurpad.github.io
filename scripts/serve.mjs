@@ -4,9 +4,9 @@ import { fileURLToPath } from 'node:url';
 import { resolve, extname, sep } from 'node:path';
 import { CRAFTS, LEVELS } from '../src/planner.js';
 const root = resolve(fileURLToPath(new URL('../', import.meta.url)));
-const allowed = new Set(['/index.html', '/src/app.js', '/src/planner.js', '/src/project-visuals.js', '/src/styles.css', '/src/fonts.css', '/assets/favicon.svg', '/assets/craft-table.svg']);
+const allowed = new Set(['/index.html', '/src/app.js', '/src/planner.js', '/src/project-visuals.js', '/src/lessons.js', '/src/styles.css', '/src/fonts.css', '/assets/favicon.svg', '/assets/fonts/google-sans.woff2', '/assets/fonts/pacifico.woff2']);
 for (const craft of Object.keys(CRAFTS)) for (const level of Object.keys(LEVELS)) allowed.add(`/assets/progress/${craft}-${level}.webp`);
-const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.webp': 'image/webp' };
+const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.woff2': 'font/woff2' };
 const port = Number(process.env.PORT || 4173);
 const server = createServer(async (request, response) => {
   try {

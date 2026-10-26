@@ -51,8 +51,8 @@ function save() {
   updateSaveNote();
 }
 function updateSaveNote() {
-  $('#plan-caption').textContent = hasSavedPlan ? '02 / YOUR LITTLE PLAN' : '02 / A LITTLE INSPIRATION';
-  $('#save-note').textContent = !storageAvailable ? 'Browser storage is unavailable. Keep this tab open or print your plan to save it.' : hasSavedPlan ? 'Saved on this browser. Your little progress stays here.' : 'An example to get you dreaming. Make it yours with the planner.';
+  $('#plan-caption').textContent = hasSavedPlan ? 'your little plan' : 'a little inspiration';
+  $('#save-note').textContent = !storageAvailable ? 'Storage is off here. Print your plan to keep it.' : hasSavedPlan ? 'Saved in this browser ♡' : 'An example to get you dreaming.';
   $('#clear-plan').hidden = !hasSavedPlan;
 }
 function checkbox(id, label, checked, onChange) {
@@ -112,7 +112,7 @@ function render() {
   $('#project-description').textContent = plan.project.description;
   $('#project-icon').textContent = plan.icon;
   $('#project-tags').replaceChildren(...[plan.craftName, LEVELS[plan.options.level], `${plan.options.days} days`, `${plan.options.minutes} min / making day`].map(text => node('span', text)));
-  $('#plan-note').textContent = `Your goal: ${plan.project.target}. ${plan.activeDays} making days + ${plan.options.days - plan.activeDays} rest days. Materials ready before day 1. Finish times vary; resize or repeat a step whenever you need.`;
+  $('#plan-note').textContent = `Goal: ${plan.project.target} · ${plan.activeDays} making days + ${plan.options.days - plan.activeDays} rest days`;
   renderVisuals();
   $('#supply-count').textContent = plan.supplies.length;
   $('#supplies').replaceChildren(...plan.supplies.map((supply, index) => {
@@ -143,19 +143,19 @@ function render() {
     return link;
   });
   const search = externalLink(`Find a project walkthrough: ${plan.project.title.toLowerCase()} ↗`, `https://www.youtube.com/results?search_query=${encodeURIComponent(plan.project.query)}`, 'project-search');
-  const searchNote = node('p', 'This opens a YouTube search for your project. These results are not individually reviewed or ranked by this planner.', 'tutorial-disclosure');
-  $('#tutorials').replaceChildren(...tutorials, search, searchNote);
+  $('#tutorials').replaceChildren(...tutorials, search);
   $('#tutorial-tip').textContent = plan.tutorialTip;
-  $('#timeline-subtitle').textContent = `Up to ${plan.options.minutes} minutes per making day, ${formatTime(plan.totalMinutes)} in the plan. Rest days are yours.`;
+  $('#timeline-subtitle').textContent = `${formatTime(plan.totalMinutes)} of making in total.`;
   const days = [];
   plan.schedule.forEach((day, index) => {
-    if (index % 7 === 0) days.push(node('h4', `WEEK ${Math.floor(index / 7) + 1}`, 'week-label'));
+    if (index % 7 === 0) days.push(node('h4', `Week ${Math.floor(index / 7) + 1}`, 'week-label'));
     const row = node('div', undefined, `day-row${day.rest ? ' rest' : ''}`);
     const input = checkbox(`day-${index}`, `Complete day ${day.day}: ${day.title}`, checkedDays.has(index), checked => checked ? checkedDays.add(index) : checkedDays.delete(index));
     const content = node('div');
     const label = node('label', day.title);
     label.htmlFor = input.id;
-    content.append(label, node('p', day.detail), node('div', day.rest ? 'No making time scheduled' : `${day.minutes} minutes, including any video practice`, 'day-time'));
+    content.append(label, node('p', day.detail), node('div', day.rest ? 'Rest day' : `${day.minutes} min`, 'day-time'));
+    if (day.watch.length) content.append(watchLinks(day.watch));
     if (day.milestone) content.append(node('span', day.milestone, 'milestone'));
     row.append(input, node('div', `DAY ${day.day}`, 'day-label'), content);
     days.push(row);
@@ -163,6 +163,55 @@ function render() {
   $('#timeline').replaceChildren(...days);
   updateProgress();
   updateSaveNote();
+}
+const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const CONFETTI = ['#ff3b3b', '#ff8c1a', '#ffc81a', '#22c55e', '#1e88ff', '#8e5cff', '#ff4fa3'];
+function celebrate() {
+  const card = $('#project-card');
+  card.classList.remove('pop');
+  void card.offsetWidth;
+  card.classList.add('pop');
+  if (reducedMotion()) return;
+  const burst = node('div', undefined, 'confetti');
+  burst.setAttribute('aria-hidden', 'true');
+  for (let index = 0; index < 36; index++) {
+    const piece = node('span');
+    piece.style.setProperty('--x', `${Math.round(Math.random() * 100)}vw`);
+    piece.style.setProperty('--drift', `${Math.round(Math.random() * 160 - 80)}px`);
+    piece.style.setProperty('--spin', `${Math.round(Math.random() * 720 - 360)}deg`);
+    piece.style.setProperty('--delay', `${Math.round(Math.random() * 400)}ms`);
+    piece.style.background = CONFETTI[index % CONFETTI.length];
+    burst.append(piece);
+  }
+  document.body.append(burst);
+  setTimeout(() => burst.remove(), 3200);
+}
+function revealOnScroll() {
+  const items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window) || reducedMotion()) { items.forEach(item => item.classList.add('is-visible')); return; }
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('is-visible');
+    observer.unobserve(entry.target);
+  }), { threshold: 0.12 });
+  document.documentElement.classList.add('motion');
+  items.forEach(item => observer.observe(item));
+}
+function watchLinks(links) {
+  const row = node('div', undefined, 'day-watch');
+  row.append(node('span', 'Watch', 'day-watch-label'));
+  let creator = '';
+  links.forEach(link => {
+    if (link.creator !== creator) {
+      creator = link.creator;
+      row.append(node('span', creator, 'day-watch-creator'));
+    }
+    const anchor = externalLink('', link.url, 'day-watch-link');
+    anchor.append(node('b', link.time), document.createTextNode(` ${link.label}`));
+    anchor.setAttribute('aria-label', `Watch ${link.label} at ${link.time} in ${link.title} by ${link.creator}, opens in a new tab`);
+    row.append(anchor);
+  });
+  return row;
 }
 function formatTime(minutes) {
   const hours = Math.floor(minutes / 60);
@@ -219,9 +268,10 @@ $('#plan-form').addEventListener('submit', event => {
   save();
   render();
   selectTab('supplies');
-  $('#status').textContent = storageAvailable ? 'Your plan is ready and saved in this browser. Start with what you already have.' : 'Your plan is ready. Browser storage is unavailable; print it to keep a copy.';
+  $('#status').textContent = storageAvailable ? 'Your plan is ready! Start with what you already have.' : 'Your plan is ready! Storage is off, so print it to keep a copy.';
   $('#my-plan').focus({ preventScroll: true });
-  $('#my-plan').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
+  $('#my-plan').scrollIntoView({ behavior: reducedMotion() ? 'instant' : 'smooth', block: 'start' });
+  celebrate();
 });
 $('#print-plan').addEventListener('click', () => window.print());
 $('#close-progress-dialog').addEventListener('click', () => $('#progress-dialog').close());
@@ -234,8 +284,9 @@ $('#clear-plan').addEventListener('click', () => {
   checkedDays.clear();
   syncForm();
   render();
-  $('#status').textContent = 'Saved plan cleared. You are viewing the example again.';
+  $('#status').textContent = 'Saved plan cleared. Here is the example again.';
   $('#craft').focus();
 });
 syncForm();
 render();
+revealOnScroll();
