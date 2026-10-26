@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Find your next handmade project. Get a personal craft plan, supply checklist, trusted tutorials, and small daily goals for crochet, knitting, or embroidery.">
+  <meta name="theme-color" content="#f8f4f0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Craft Happens | Your next handmade project</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="stylesheet" href="./src/styles.css">
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <div class="background-captions" aria-hidden="true">
+    <span>Stitch, please.</span>
+    <span>Not another hobby.</span>
+    <span>Get your knit together.</span>
+    <span>Unfinished business.</span>
+    <span>Procraftinate.</span>
+    <span>The plot stitchens.</span>
+    <span>Make it sew.</span>
+    <span>Craft &amp; disorder.</span>
+  </div>
+  <a class="skip-link" href="#planner">Skip to craft planner</a>
+  <header class="site-header wrap">
+    <a class="brand" href="#" aria-label="Craft Happens home"><img src="./assets/favicon.svg" alt="" width="38" height="38"><span>craft happens<span class="brand-dot">.</span></span></a>
+    <nav aria-label="Main navigation"><a class="active" href="#planner">The craft planner</a><a href="#how-it-works">How it works</a><a class="nav-plan" href="#my-plan"><span aria-hidden="true">♡</span> My plan</a></nav>
+  </header>
+  <main>
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy"><div class="eyebrow"><span class="little-star" aria-hidden="true">✳</span> A LITTLE CREATIVITY, JUST FOR YOU</div><h1 id="hero-title">Make time for a<br>little <em>handmade.</em></h1><p>That craft you've been meaning to try?<br>Let's turn it into something you can actually finish.<br>A few supplies, a little guidance, one happy stitch at a time.</p><div class="hero-note"><span aria-hidden="true">↳</span> small steps. lovely things.</div></div>
+      <div class="hero-art"><img src="./assets/craft-table.svg" alt="Pastel yarn, knitting needles, a floral embroidery hoop, and scissors arranged on a craft table" width="620" height="410"><div class="art-label"><span aria-hidden="true">✧</span> made by you, with a little help</div></div>
+    </section>
+    <div class="ribbon" aria-hidden="true"><span>MORE MAKING</span><span>LESS OVERTHINKING</span><span>A LITTLE EVERY DAY</span></div>
+    <section id="planner" class="workspace wrap" aria-label="Craft planner">
+      <aside class="planner-card">
+        <div class="section-kicker">01 / THE POSSIBILITIES</div><h2>What shall we make?</h2><p class="muted">A plan that fits your life, and your yarn basket.</p>
+        <form id="plan-form">
+          <label for="craft">I'm in the mood for…</label><div class="input-wrap"><span aria-hidden="true">✿</span><input id="craft" name="craft" type="text" value="Crochet" placeholder="Try crochet, knitting, embroidery" maxlength="80" required autocomplete="off" list="craft-options" aria-describedby="craft-help craft-error"><datalist id="craft-options"><option value="Crochet"></option><option value="Knitting"></option><option value="Embroidery"></option></datalist></div>
+          <div class="craft-chips" aria-label="Choose a craft"><button type="button" data-craft="Crochet" aria-pressed="true">Crochet</button><button type="button" data-craft="Knitting" aria-pressed="false">Knitting</button><button type="button" data-craft="Embroidery" aria-pressed="false">Embroidery</button></div><p id="craft-help" class="field-help">Three crafts to start. More little joys to come.</p><p id="craft-error" class="field-error" role="alert" hidden></p>
+          <fieldset><legend>How familiar does it feel?</legend><div class="level-options"><label><input type="radio" name="level" value="beginner" checked><span><b>Just starting</b><small>Let's learn the basics</small></span></label><label><input type="radio" name="level" value="intermediate"><span><b>A little practice</b><small>Ready for a new stitch</small></span></label><label><input type="radio" name="level" value="advanced"><span><b>Feeling confident</b><small>Bring on the details</small></span></label></div></fieldset>
+          <label for="minutes">A little time each day</label><select id="minutes" name="minutes"><option value="15">15 minutes · a tiny pocket of time</option><option value="30" selected>30 minutes · a lovely little break</option><option value="45">45 minutes · settle into it</option><option value="60">60 minutes · my making hour</option></select>
+          <fieldset><legend>Let's take it at your pace</legend><div class="duration-options"><label><input type="radio" name="days" value="7"><span>1 week <small>A little momentum</small></span></label><label><input type="radio" name="days" value="14" checked><span>2 weeks <small>Room to breathe</small></span></label></div></fieldset>
+          <button class="primary-button" type="submit"><span aria-hidden="true">✧</span> Make my craft plan <span aria-hidden="true">↗</span></button><p class="form-footnote">Free to make. No account. Just you and your creativity.</p>
+        </form>
+      </aside>
+      <section class="plan-area" id="my-plan" aria-labelledby="plan-heading" tabindex="-1">
+        <div class="plan-topline"><span class="section-kicker" id="plan-caption">02 / A LITTLE INSPIRATION</span><button class="text-button" id="print-plan" type="button"><span aria-hidden="true">↓</span> Print / save PDF</button></div>
+        <div class="project-card"><div class="project-icon" id="project-icon" aria-hidden="true">✿</div><div><span class="project-kicker" id="project-kicker">YOUR NEXT LITTLE JOY</span><h2 id="plan-heading"></h2><p id="project-description"></p><div class="project-tags" id="project-tags"></div></div><span class="project-flower" aria-hidden="true">✳</span></div>
+        <p class="plan-note" id="plan-note"></p><p class="status" id="status" role="status" aria-live="polite"></p>
+        <section class="project-journey" aria-labelledby="journey-heading">
+          <div class="journey-heading"><div><span class="section-kicker">PICTURE YOUR PROGRESS</span><h3 id="journey-heading">See what you're making</h3></div><span class="journey-hint">Tap a picture to look closer</span></div>
+          <div class="stage-grid" id="project-stages"></div>
+          <p class="image-disclosure">AI-generated visual references, not photos from the tutorials. Colors, proportions, and stitch details may vary. Follow the tutorials for technique.</p>
+        </section>
+        <div class="plan-tabs" role="tablist" aria-label="Your craft plan"><button type="button" id="tab-supplies" role="tab" aria-selected="true" aria-controls="panel-supplies" tabindex="0" data-tab="supplies">Your supplies <span id="supply-count"></span></button><button type="button" id="tab-tutorials" role="tab" aria-selected="false" aria-controls="panel-tutorials" tabindex="-1" data-tab="tutorials">A little guidance</button><button type="button" id="tab-timeline" role="tab" aria-selected="false" aria-controls="panel-timeline" tabindex="-1" data-tab="timeline">Your little timeline</button></div>
+        <section id="panel-supplies" role="tabpanel" aria-labelledby="tab-supplies" tabindex="0"><div class="panel-heading"><div><h3>Gather your good things</h3><p>Check your stash first. You might have a head start.</p></div><span id="supply-progress" class="counter"></span></div><div id="supplies"></div><div class="supply-disclosure"><span aria-hidden="true">♡</span><p>Shopping links open store search results, with no affiliate fees. Compare sizes and quantities before buying. Prices and availability vary.</p></div><details class="store-note"><summary>Looking for JOANN?</summary><p>JOANN has closed. <a href="https://www.michaels.com/lp/welcome-joann" target="_blank" rel="noopener noreferrer">Michaels welcomes JOANN shoppers ↗</a> and carries some of its former brands.</p></details></section>
+        <section id="panel-tutorials" role="tabpanel" aria-labelledby="tab-tutorials" tabindex="0" hidden><div class="panel-heading"><div><h3>A friendly face to learn from</h3><p>Pause, rewind, and take it one stitch at a time.</p></div></div><div id="tutorials"></div><p class="tutorial-disclosure">Curated lessons, not live rankings. View counts are rounded research snapshots checked October 26, 2026 and may change. Project searches are labeled separately.</p><div class="gentle-note"><span aria-hidden="true">✧</span><p id="tutorial-tip"></p></div></section>
+        <section id="panel-timeline" role="tabpanel" aria-labelledby="tab-timeline" tabindex="0" hidden><div class="panel-heading"><div><h3>Small steps, lovely progress</h3><p id="timeline-subtitle"></p></div><span id="day-progress" class="counter"></span></div><progress id="timeline-progress" max="14" value="0" aria-label="Completed days"></progress><div id="timeline"></div><div class="gentle-note"><span aria-hidden="true">♡</span><p>Missed a day? Pick up where you left off. This is your hobby, and the calendar can wait.</p></div></section>
+        <div class="save-note"><span id="save-note">Try the example, or make a plan of your own.</span><button type="button" class="text-button" id="clear-plan" hidden>Clear saved plan</button></div>
+      </section>
+    </section>
+    <section id="how-it-works" class="how-section wrap"><div class="section-kicker">A HOBBY, WITHOUT THE HOMEWORK</div><h2>From “maybe someday” to “I made this.”</h2><div class="how-grid"><article><span class="step-number pink">01</span><h3>Follow your curiosity</h3><p>Choose your craft, your comfort level, and a little time you can call your own.</p></article><article><span class="step-number lavender">02</span><h3>Get your things together</h3><p>A practical supply list and popular video lessons give you a place to start.</p></article><article><span class="step-number sage">03</span><h3>Make a little, every day</h3><p>Small goals and built-in breathing room help you finish a project at your pace.</p></article></div></section>
+    <section class="closing-note"><span aria-hidden="true">✿</span><p>You don't have to be good at it<br>for it to be <em>good for you.</em></p><span aria-hidden="true">✿</span></section>
+  </main>
+  <footer class="wrap"><a class="brand footer-brand" href="#" aria-label="Craft Happens home">craft happens.</a><p>A little handmade happiness. Made by Vibha. <span class="release-version">v1.0.0</span></p><details><summary>Your plan & privacy</summary><p>Your generated plan and checkmarks stay in this browser's local storage. No accounts, analytics, or API calls. External stores and YouTube have their own privacy policies. Use “Clear saved plan” to remove your plan from this browser.</p></details></footer>
+  <dialog class="progress-dialog" id="progress-dialog" aria-labelledby="progress-dialog-title" aria-describedby="progress-dialog-description">
+    <button type="button" class="dialog-close" id="close-progress-dialog" aria-label="Close enlarged picture" autofocus>×</button>
+    <h2 id="progress-dialog-title"></h2>
+    <div id="progress-dialog-image"></div>
+    <p id="progress-dialog-description"></p>
+    <p class="image-disclosure">AI-generated visual reference. Use the tutorial for exact technique.</p>
+  </dialog>
+  <noscript><p class="noscript">Please enable JavaScript to generate your craft plan. No account or API key is needed.</p></noscript>
+</body>
+</html>

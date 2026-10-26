@@ -1,1 +1,5 @@
 /AGENTS.md
+/dist/
+/node_modules/
+/.preview/
+*.log

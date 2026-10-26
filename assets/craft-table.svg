@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 410" fill="none">
+<defs>
+ <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" stroke="#e7ded7" stroke-width=".6"/></pattern>
+ <pattern id="fabric" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M0 1H5M1 0V5" stroke="#e6ded0" stroke-width=".4"/></pattern>
+ <pattern id="knit" width="14" height="16" patternUnits="userSpaceOnUse"><path d="M7 16C-2 10 1 1 7 8C13 1 16 10 7 16Z" stroke="#b1bca0" stroke-width="1.8"/></pattern>
+ <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#77604d" flood-opacity=".12"/></filter>
+ <clipPath id="ball"><ellipse cx="194" cy="240" rx="78" ry="65" transform="rotate(-20 194 240)"/></clipPath>
+ <clipPath id="blueball"><ellipse cx="309" cy="305" rx="52" ry="45" transform="rotate(20 309 305)"/></clipPath>
+</defs>
+<path d="M74 60C132 10 213 25 290 29C380 34 492 1 548 70C597 130 572 218 550 292C526 370 438 385 352 383C270 381 150 410 93 347C35 283 0 123 74 60Z" fill="#efe7ee"/>
+<path d="M74 60C132 10 213 25 290 29C380 34 492 1 548 70C597 130 572 218 550 292C526 370 438 385 352 383C270 381 150 410 93 347C35 283 0 123 74 60Z" fill="url(#grid)"/>
+<!-- a sage knitted swatch and wooden needles -->
+<g transform="rotate(-13 170 120)" filter="url(#shadow)"><path d="M90 75H231V179Q163 191 90 176Z" fill="#c8d1b8"/><path d="M90 75H231V179Q163 191 90 176Z" fill="url(#knit)"/><path d="M80 69H250" stroke="#c59466" stroke-width="6" stroke-linecap="round"/><path d="M91 54L236 177" stroke="#d3a476" stroke-width="6" stroke-linecap="round"/><circle cx="77" cy="69" r="7" fill="#b88458"/><circle cx="89" cy="51" r="7" fill="#b88458"/><path d="M236 177L246 187L240 173" fill="#d3a476"/><path d="M250 66L263 69L250 72" fill="#c59466"/></g>
+<!-- embroidery hoop -->
+<g transform="rotate(15 418 169)" filter="url(#shadow)"><rect x="398" y="42" width="40" height="24" rx="5" fill="#bc9168"/><rect x="411" y="33" width="14" height="20" rx="2" fill="#c4b6a1"/><path d="M407 38H430" stroke="#9d8e79" stroke-width="4" stroke-linecap="round"/><circle cx="418" cy="168" r="111" fill="#d5ad83"/><circle cx="418" cy="168" r="102" fill="#fbf7ed" stroke="#bc9168" stroke-width="2"/><circle cx="418" cy="168" r="101" fill="url(#fabric)"/>
+ <path d="M402 234C400 195 424 174 426 137M404 214Q375 195 375 167M408 202Q450 190 464 168" stroke="#83977a" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 3"/>
+ <path d="M405 214C378 210 372 198 376 194C386 186 403 201 405 214M414 183C423 163 438 159 441 166C446 175 423 184 414 183M400 225C416 209 433 208 434 214C438 225 409 229 400 225" fill="#a1b193"/>
+ <g fill="#d6a1b3" stroke="#c28aa1" stroke-width="1"><ellipse cx="428" cy="113" rx="9" ry="19"/><ellipse cx="428" cy="153" rx="9" ry="19"/><ellipse cx="408" cy="133" rx="19" ry="9"/><ellipse cx="448" cy="133" rx="19" ry="9"/><ellipse cx="413" cy="118" rx="9" ry="16" transform="rotate(-45 413 118)"/><ellipse cx="443" cy="148" rx="9" ry="16" transform="rotate(-45 443 148)"/><ellipse cx="443" cy="118" rx="9" ry="16" transform="rotate(45 443 118)"/><ellipse cx="413" cy="148" rx="9" ry="16" transform="rotate(45 413 148)"/></g><circle cx="428" cy="133" r="11" fill="#e6c275"/><g stroke="#b99455" stroke-width="2"><path d="M424 128L426 132M432 131L431 136M425 138L428 140"/></g>
+ <g fill="#c7b5d7"><ellipse cx="376" cy="150" rx="6" ry="11"/><ellipse cx="376" cy="172" rx="6" ry="11"/><ellipse cx="365" cy="161" rx="11" ry="6"/><ellipse cx="387" cy="161" rx="11" ry="6"/></g><circle cx="376" cy="161" r="5" fill="#e6c275"/>
+ <g fill="#e2c688"><ellipse cx="465" cy="154" rx="5" ry="9"/><ellipse cx="465" cy="172" rx="5" ry="9"/><ellipse cx="456" cy="163" rx="9" ry="5"/><ellipse cx="474" cy="163" rx="9" ry="5"/></g><circle cx="465" cy="163" r="4" fill="#bd9962"/>
+</g>
+<!-- pink ball of yarn -->
+<g filter="url(#shadow)"><ellipse cx="194" cy="240" rx="78" ry="65" transform="rotate(-20 194 240)" fill="#e4b5c5"/><g clip-path="url(#ball)" stroke="#cd96ab" stroke-width="2.6"><path d="M107 277Q147 146 255 180M112 285Q150 154 260 188M120 293Q163 163 266 196M129 300Q173 170 271 204M139 306Q182 177 274 212M150 310Q195 182 280 219M162 313Q208 188 283 228M174 316Q222 194 286 237"/><path d="M97 222Q185 199 248 302M99 211Q189 191 257 291M102 200Q191 182 266 282M106 189Q200 173 272 273M112 180Q207 165 278 265M121 171Q219 158 285 255"/></g></g>
+<path d="M137 279C114 309 113 348 152 350C190 352 187 326 164 329C138 332 170 378 218 370C251 365 245 345 280 351" stroke="#ce97ad" stroke-width="4" stroke-linecap="round"/>
+<!-- blue yarn -->
+<g filter="url(#shadow)"><ellipse cx="309" cy="305" rx="52" ry="45" transform="rotate(20 309 305)" fill="#b8cdd9"/><g clip-path="url(#blueball)" stroke="#96b4c7" stroke-width="2.2"><path d="M255 274Q336 270 341 359M263 268Q345 276 349 357M272 262Q354 278 357 352M283 258Q361 282 365 349M292 254Q369 285 373 345M302 250Q378 290 380 341M255 319Q286 254 355 275M251 329Q289 262 361 284M250 339Q292 271 368 295M250 349Q298 280 374 308M250 359Q305 290 379 319"/></g></g>
+<!-- vintage scissors -->
+<g transform="rotate(-23 450 311)" filter="url(#shadow)"><path d="M447 315L429 253Q452 266 461 304L463 319" fill="#c7bfb9"/><path d="M459 315L480 252Q458 267 449 303L446 320" fill="#eee8e1" stroke="#b7aea5" stroke-width="1"/><circle cx="453" cy="315" r="6" fill="#c7a16c"/><path d="M449 321L438 338M459 321L472 338" stroke="#b88e56" stroke-width="5"/><ellipse cx="432" cy="349" rx="12" ry="17" transform="rotate(25 432 349)" stroke="#c8a06c" stroke-width="5"/><ellipse cx="479" cy="349" rx="12" ry="17" transform="rotate(-25 479 349)" stroke="#c8a06c" stroke-width="5"/></g>
+<path d="M277 64V82M268 73H286M549 262V278M541 270H557" stroke="#b69abf" stroke-width="2" stroke-linecap="round"/><path d="M63 230L66 238L74 241L66 244L63 252L60 244L52 241L60 238Z" fill="#c4a8c8"/><path d="M546 93Q537 80 531 88Q525 98 546 106Q565 86 555 83Q548 81 546 93" fill="#d5a1b3"/>
+</svg>
